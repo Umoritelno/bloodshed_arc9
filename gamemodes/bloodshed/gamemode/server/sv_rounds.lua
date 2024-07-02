@@ -310,7 +310,7 @@ function MuR:MakeTeamsInGame()
 		local ply = tab2[id]
 		ply:SetNWString("Class", "Traitor")
 		ply:SetTeam(1)
-		ply:GiveWeapon("tacrp_xd45")
+		ply:GiveWeapon("mur_glock_s")
 		ply:AllowFlashlight(true)
 		ply:GiveAmmo(18, "Pistol", true)
 		ply:GiveWeapon("mur_combat_knife", true)
@@ -319,7 +319,7 @@ function MuR:MakeTeamsInGame()
 		local id = math.random(1, #tab2)
 		local ply = tab2[id]
 		ply:SetNWString("Class", "Defender")
-		ply:GiveWeapon("tacrp_p2000")
+		ply:GiveWeapon("mur_m9")
 		MuR:GiveAnnounce("you_defender", ply)
 		table.remove(tab2, id)
 	end

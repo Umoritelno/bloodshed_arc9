@@ -53,5 +53,5 @@ hook.Add("RenderScreenspaceEffects","MuR.PainImpulse",function()
 		impulse = 0
 		blurimpulse = 0
 	end
-	DrawCA(4 * k3, 2 * k3, 0, 2 * k3, 1 * k3, 0)
+	//DrawCA(4 * k3, 2 * k3, 0, 2 * k3, 1 * k3, 0)
 end)

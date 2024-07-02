@@ -19,21 +19,21 @@ MuR.guiltSession = {}
 local WeaponsTable = {
     ["Primary"] = {
         {
-            class = "tacrp_ex_ak47",
+            class = "mur_ak103",
             ammo = "AR2",
             count = 30,
         },
         {
-            class = "tacrp_amd65",
+            class = "mur_mk18",
             ammo = "AR2",
             count = 30,
         },
         {
-            class = "tacrp_ex_m4a1",
-            ammo = "SMG1",
+            class = "mur_m4a1",
+            ammo = "AR2",
             count = 30,
         },
-        {
+        --[[{
             class = "tacrp_k1a",
             ammo = "SMG1",
             count = 30,
@@ -62,173 +62,88 @@ local WeaponsTable = {
             class = "tacrp_aug",
             ammo = "SMG1",
             count = 36,
-        },
+        },--]]
         {
-            class = "tacrp_ex_mp9",
-            ammo = "Pistol",
-            count = 30,
-        },
-        {
-            class = "tacrp_p90",
-            ammo = "Pistol",
-            count = 50,
-        },
-        {
-            class = "tacrp_mp5",
-            ammo = "Pistol",
-            count = 30,
-        },
-        {
-            class = "tacrp_mp7",
-            ammo = "Pistol",
-            count = 40,
-        },
-        {
-            class = "tacrp_ex_ump45",
-            ammo = "Pistol",
-            count = 25,
-        },
-        {
-            class = "tacrp_pdw",
+            class = "mur_mac10",
             ammo = "SMG1",
             count = 30,
         },
         {
-            class = "tacrp_superv",
-            ammo = "Pistol",
-            count = 24,
+            class = "mur_mp7",
+            ammo = "SMG1",
+            count = 50,
         },
-        {
-            class = "tacrp_m4star10",
+		{
+            class = "mur_m300",
             ammo = "Buckshot",
             count = 7,
         },
         {
-            class = "tacrp_fp6",
+            class = "mur_m870",
             ammo = "Buckshot",
             count = 8,
         },
-        {
-            class = "tacrp_ks23",
+		{
+            class = "mur_nova",
             ammo = "Buckshot",
-            count = 4,
+            count = 8,
         },
-        {
-            class = "tacrp_bekas",
+		{
+            class = "mur_spas12",
             ammo = "Buckshot",
-            count = 6,
+            count = 8,
         },
-        {
-            class = "tacrp_tgs12",
-            ammo = "Buckshot",
-            count = 6,
+		{
+            class = "mur_mosin",
+            ammo = "SniperRound",
+            count = 8,
         },
-        {
-            class = "tacrp_civ_p90",
-            ammo = "SMG1",
-            count = 30,
-        },
-        {
-            class = "tacrp_civ_mp5",
-            ammo = "SMG1",
-            count = 30,
-        },
-        {
-            class = "tacrp_m1",
-            ammo = "SMG1",
-            count = 30,
-        },
-        {
-            class = "tacrp_dsa58",
-            ammo = "AR2",
-            count = 20,
-        },
-        {
-            class = "tacrp_hk417",
-            ammo = "AR2",
-            count = 20,
-        },
-        {
-            class = "tacrp_uratio",
-            ammo = "357",
-            count = 6,
-        },
-        {
-            class = "tacrp_spr",
-            ammo = "357",
-            count = 5,
+		{
+            class = "mur_sks",
+            ammo = "SniperRound",
+            count = 8,
         },
     },
     ["Secondary"] = {
         {
-            class = "tacrp_glock",
+            class = "mur_glock",
             ammo = "Pistol",
             count = 18,
         },
         {
-            class = "tacrp_vertec",
+            class = "mur_fnp45",
             ammo = "Pistol",
             count = 15,
         },
         {
-            class = "tacrp_ex_m1911",
+            class = "mur_m45",
             ammo = "Pistol",
             count = 7,
         },
         {
-            class = "tacrp_ex_hk45c",
+            class = "mur_m9",
             ammo = "Pistol",
             count = 10,
         },
         {
-            class = "tacrp_p2000",
+            class = "mur_makarov",
             ammo = "Pistol",
-            count = 15,
+            count = 7,
         },
         {
-            class = "tacrp_ex_usp",
+            class = "mur_p99",
             ammo = "Pistol",
             count = 12,
         },
         {
-            class = "tacrp_gsr1911",
+            class = "mur_ots33",
             ammo = "Pistol",
             count = 8,
         },
-        {
-            class = "tacrp_p250",
+		{
+            class = "mur_sw500",
             ammo = "Pistol",
-            count = 12,
-        },
-        {
-            class = "tacrp_uzi",
-            ammo = "Pistol",
-            count = 30,
-        },
-        {
-            class = "tacrp_ex_mac10",
-            ammo = "Pistol",
-            count = 32,
-        },
-        {
-            class = "tacrp_skorpion",
-            ammo = "Pistol",
-            count = 30,
-        },
-        {
-            class = "tacrp_sphinx",
-            ammo = "Pistol",
-            count = 16,
-        },
-        {
-            class = "tacrp_xd45",
-            ammo = "Pistol",
-            count = 20,
-        },
-        {
-            class = "tacrp_mr96",
-            ammo = "357",
-            count = 6,
+            count = 8,
         },
     },
 	["Melee"] = {
@@ -655,10 +570,10 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 		ply:SetNWFloat("ArrestState", 1)
 	elseif class == "Traitor" then
 		if MuR.Gamemode ~= 7 then
-			ply:GiveWeapon("tacrp_xd45")
+			ply:GiveWeapon("mur_glock_s")
 			ply:GiveAmmo(18, "Pistol", true)
 		else
-			ply:GiveWeapon("tacrp_mr96")
+			ply:GiveWeapon("mur_mr96")
 			ply:GiveAmmo(12, "357", true)
 		end
 
@@ -684,7 +599,7 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 		ply:GiveWeapon("mur_combat_knife", true)
 		ply:SetTeam(1)
 	elseif class == "FBI" then
-		ply:GiveWeapon("tacrp_ex_glock")
+		ply:GiveWeapon("mur_glock")
 		ply:GiveWeapon("mur_handcuffs", true)
 		ply:GiveWeapon("mur_loot_bandage")
 		ply:GiveWeapon("mur_disguise", true)
@@ -693,7 +608,7 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 		ply:SetArmor(10)
 		ply:SetTeam(3)
 	elseif class == "Officer" then
-		ply:GiveWeapon("tacrp_ex_glock")
+		ply:GiveWeapon("mur_glock")
 		ply:GiveWeapon("mur_taser", true)
 		ply:GiveWeapon("mur_pepperspray", true)
 		ply:GiveWeapon("mur_handcuffs", true)
@@ -709,9 +624,9 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 		ply.Male = true
 		ply:SetTeam(3)
 	elseif class == "ArmoredOfficer" then
-		ply:GiveWeapon("tacrp_riot_shield")
-		ply:GiveWeapon("tacrp_mp5")
-		ply:GiveWeapon("tacrp_ex_glock")
+		//ply:GiveWeapon("tacrp_riot_shield")
+		ply:GiveWeapon("mur_mp7")
+		ply:GiveWeapon("mur_glock")
 		ply:GiveWeapon("mur_taser", true)
 		ply:GiveWeapon("mur_handcuffs", true)
 		ply:GiveWeapon("mur_baterringram", true)
@@ -767,7 +682,7 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 		ply:AllowFlashlight(true)
 		ply:SetModel(table.Random(MuR.PlayerModels["Terrorist"]))
 		local sec, mel = table.Random(WeaponsTable["Primary"]), table.Random(WeaponsTable["Melee"])
-		ply:GiveWeapon("tacrp_m320", true)
+		ply:GiveWeapon("mur_m300", true) // че такое tacrp_m320
 		ply:GiveWeapon("mur_ied", true)
 		ply:GiveWeapon("mur_m67")
 		ply:GiveWeapon("mur_f1")
@@ -792,9 +707,9 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 		ply:GiveAmmo(pri.count * 2, pri.ammo, true)
 	elseif class == "Defender" then
 		if MuR.Gamemode ~= 7 then
-			ply:GiveWeapon("tacrp_p2000")
+			ply:GiveWeapon("mur_m9")
 		else
-			ply:GiveWeapon("tacrp_mr96")
+			ply:GiveWeapon("mur_mr96")
 		end
 	elseif class == "Zombie" then
 		timer.Simple(0.01, function()
@@ -1552,7 +1467,7 @@ end)
 
 hook.Add("PlayerUse", "MuR_DoorUse", function(ply, door)
 	if door:GetClass() == "prop_door_rotating" or door:GetClass() == "func_door_rotating" then
-		if not door.AntiDoorSpam or CurTime() - door.AntiDoorSpam > 0.5 and ply:GetNWString("Class") ~= "Zombie" then
+		if !door.AntiDoorSpam or (CurTime() - door.AntiDoorSpam > 0.5) then // ply:GetNWString("Class") ~= "Zombie"
 			door.AntiDoorSpam = CurTime()
 		else
 			return false

@@ -1,6 +1,8 @@
 local meta = FindMetaTable('Player')
 local meta2 = FindMetaTable('Entity')
 
+CVARFLAGS = bit.bor(FCVAR_ARCHIVE,FCVAR_NOTIFY,FCVAR_REPLICATED)
+
 function meta2:GetSVAnim()
 	return self:GetNWString('SVAnim', '')
 end
@@ -136,6 +138,16 @@ function MuR:CountPlayerPolice()
 		end
 	end
 	return alive, dead
+end
+
+function getMuzzle(wep) // TODO: поменять реализацию(больно уж глаза режет)
+	if (wep:LookupAttachment("muzzle_flash") > 0) then
+		return wep:LookupAttachment("muzzle_flash"), true
+	elseif (wep:LookupAttachment("muzzle") > 0) then 
+		return wep:LookupAttachment("muzzle"), true
+	else 
+		return 0, false
+	end 
 end
 
 hook.Add("SetupMove", "MuR.AimSpeed", function(ply, mvd, cmd)

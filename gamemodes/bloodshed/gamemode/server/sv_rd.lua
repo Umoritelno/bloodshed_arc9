@@ -1,6 +1,8 @@
 local ent = FindMetaTable("Entity")
 local pl = FindMetaTable("Player")
 
+local rag_collidespeed = CreateConVar("mur_ragdoll_collidespeed",400,CVARFLAGS,"Скорость при столкновении для введения человека в рэгдолл",0)
+
 local function TransferBones(base, ragdoll)
 	if not IsValid(base) or not IsValid(ragdoll) then return end
 
@@ -137,8 +139,7 @@ function pl:GiveRagdollWeapon(ent, awep)
 		else
 			local wep = ents.Create("murwep_ragdoll_weapon")
 			wep.Owner = ent
-
-			if IsValid(awep) and awep:GetMaxClip1() > 0 and awep.ArcticTacRP and awep.RagdollType then
+			if IsValid(awep) and awep:GetMaxClip1() > 0 and awep.RagdollType then // awep.ArcticTacRP
 				wep.Weapon = awep
 				wep.type = awep.RagdollType
 			end
@@ -182,7 +183,7 @@ function pl:CreateAdvancedRagdoll()
 		net.Send(self)
 	end)
 	local function PhysCallback(ent, data)
-		if data.Speed > 400 and data.HitEntity:IsPlayer() and IsValid(ent.Owner) and data.HitEntity:GetMoveType() ~= MOVETYPE_NOCLIP then
+		if data.Speed > rag_collidespeed:GetFloat() and data.HitEntity:IsPlayer() and IsValid(ent.Owner) and data.HitEntity:GetMoveType() ~= MOVETYPE_NOCLIP then
 			data.HitEntity:StartRagdolling()
 		end
 	end
@@ -201,8 +202,12 @@ function pl:CreateAdvancedRagdoll()
 	return ent
 end
 
+function pl:CanRagdoll()
+	return !(self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") or self:GetSVAnimation() != "")
+end
+
 function pl:StartRagdolling(moans, dam, gibs)
-	if self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") then return end
+	if !self:CanRagdoll() then return end
 	moans = moans or 0
 	dam = dam or 0
 	local ent = self:CreateAdvancedRagdoll()

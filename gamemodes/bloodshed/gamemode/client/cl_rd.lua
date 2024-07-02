@@ -105,7 +105,7 @@ hook.Add("HUDPaint", "RD_CamWork", function()
 			if wep:GetNWBool('IsItem') then
 				local parsed = markup.Parse("<font=MuR_Font1><colour=255,255,255>"..MuR.Language["ragdoll_press"].."<colour=200,200,0>CTRL<colour=255,255,255>"..MuR.Language["ragdoll_wep3"])
 				parsed:Draw(ScrW() / 2, He(880) + He(130), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			elseif wep:LookupAttachment("muzzle_flash") > 0 then
+			elseif select(getMuzzle(wep),2) then
 				local parsed = markup.Parse("<font=MuR_Font1><colour=255,255,255>"..MuR.Language["ragdoll_press"].."<colour=200,200,0>CTRL<colour=255,255,255>"..MuR.Language["ragdoll_wep1"])
 				parsed:Draw(ScrW() / 2, He(880) + He(130), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 				local parsed = markup.Parse("<font=MuR_Font1><colour=255,255,255>"..MuR.Language["ragdoll_press"].."<colour=200,200,0>R<colour=255,255,255>"..MuR.Language["ragdoll_wep2"])
@@ -121,8 +121,10 @@ hook.Add("PostDrawOpaqueRenderables", "fdasdf", function()
 	local tr = ply:GetEyeTrace()
 
 	local wep = ply:GetNWEntity('RD_Weapon')
-	if IsValid(wep) and wep:LookupAttachment("muzzle_flash") > 0 then
-		local att = wep:GetAttachment(wep:LookupAttachment("muzzle_flash"))
+	if IsValid(wep) then
+		local attid, atthas = getMuzzle(wep)
+		if !atthas then ErrorNoHaltWithStack("Cant draw glow_mat for weapon ",wep) return end
+		local att = wep:GetAttachment(attid)
 		local tr = util.TraceLine({
 			start = att.Pos+att.Ang:Forward(),
 			endpos = att.Pos+att.Ang:Forward()*1000,

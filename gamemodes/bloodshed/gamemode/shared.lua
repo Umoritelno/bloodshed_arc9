@@ -281,7 +281,7 @@ MuR.Shop = {
 			icon = "entities/sw500.png",
 			price = 50,
 			func = function(ply)
-				ply:GiveWeapon("tacrp_mr96")
+				ply:GiveWeapon("mur_mr96")
 			end,
 		},
 		{
@@ -293,19 +293,19 @@ MuR.Shop = {
 			end,
 		},
 		{
-			name = "UZI",
+			name = "M870",
 			icon = "entities/tfa_ins2_izh43sw_2.png",
 			price = 100,
 			func = function(ply)
-				ply:GiveWeapon("tacrp_uzi")
+				ply:GiveWeapon("mur_m870")
 			end,
 		},
 		{
-			name = "SPR",
+			name = "Mosin Nagant",
 			icon = "entities/mosin.png",
 			price = 275,
 			func = function(ply)
-				ply:GiveWeapon("tacrp_spr")
+				ply:GiveWeapon("mur_mosin")
 			end,
 		},
 		{
@@ -313,41 +313,41 @@ MuR.Shop = {
 			icon = "entities/mp7.png",
 			price = 325,
 			func = function(ply)
-				ply:GiveWeapon("tacrp_mp7")
+				ply:GiveWeapon("mur_mp7")
 			end,
 		},
 		{
-			name = "Benelli M4",
+			name = "SPAS-12",
 			icon = "entities/spas12.png",
 			price = 375,
 			func = function(ply)
-				ply:GiveWeapon("tacrp_m4star10")
+				ply:GiveWeapon("mur_spas12")
 			end,
 		},
 		{
-			name = "M14",
+			name = "SKS",
 			icon = "entities/sks.png",
 			price = 400,
 			func = function(ply)
-				ply:GiveWeapon("tacrp_m14")
+				ply:GiveWeapon("mur_sks")
 			end,
 		},
-		{
+		--[[{
 			name = "AS50",
 			icon = "entities/sr25.png",
 			price = 500,
 			func = function(ply)
 				ply:GiveWeapon("tacrp_as50")
 			end,
-		},
-		{
+		},--]] // у sr25 баг с руками, потом найду замену
+		--[[{
 			name = "RPG-7",
 			icon = "entities/rpg7.png",
 			price = 1000,
 			func = function(ply)
 				ply:GiveWeapon("tacrp_rpg7")
 			end,
-		}
+		}--]] // либо удалю, либо найду замену
 	}
 }
 
@@ -424,51 +424,31 @@ MuR.Loot = {
 		chance = 10
 	},
 	{
-		class = "tacrp_ex_m1911",
+		class = "mur_m45",
 		chance = 5
 	},
 	{
-		class = "tacrp_gsr1911",
+		class = "mur_m9",
 		chance = 5
 	},
 	{
-		class = "tacrp_ex_usp",
+		class = "mur_fnp45",
 		chance = 4
 	},
 	{
-		class = "tacrp_ex_hk45c",
+		class = "mur_mr96",
 		chance = 4
 	},
 	{
-		class = "tacrp_p2000",
+		class = "mur_sw500",
 		chance = 4
 	},
 	{
-		class = "tacrp_vertec",
+		class = "mur_makarov",
 		chance = 4
 	},
 	{
-		class = "tacrp_p250",
-		chance = 4
-	},
-	{
-		class = "tacrp_sphinx",
-		chance = 3
-	},
-	{
-		class = "tacrp_mr96",
-		chance = 3
-	},
-	{
-		class = "tacrp_xd45",
-		chance = 2
-	},
-	{
-		class = "tacrp_ex_mac10",
-		chance = 2
-	},
-	{
-		class = "tacrp_uzi",
+		class = "mur_mac10",
 		chance = 2
 	},
 	---OTHERS---
@@ -576,3 +556,10 @@ MuR.WeaponToRagdoll = {
 -------------------------------------------------------------------------
 
 game.AddDecal("mur_ducttape", "decals/mur_ducttape")
+
+-------------------------------------------------------------------------
+
+hook.Add("GetGameDescription","MuR.GetGameDescription",function()
+	return "BloodShed"
+end)
+

@@ -239,7 +239,7 @@ SWEP.ShootAngOffset = Angle(0, 0, 0)
 
 -------------------------- MAGAZINE
 
-SWEP.Ammo = "buckshot" -- What ammo type this gun uses.
+SWEP.Ammo = "Buckshot" -- What ammo type this gun uses.
 
 SWEP.ChamberSize = 0 -- The amount of rounds this gun can chamber.
 SWEP.ClipSize = 2 -- Self-explanatory.
@@ -1349,7 +1349,7 @@ SWEP.SuppressSprintSuffix = false -- _sprint animations won't automatically trig
 SWEP.SuppressDefaultEvents = false -- Animations will not trigger animation events.
 SWEP.SuppressCumulativeShoot = false -- fire_1, fire_2, and fire_3 will not automatically trigger.
 
-SWEP.InstantSprintIdle = false -- Instantly go to idle_sprint instead of playing enter_sprint.
+SWEP.InstantSprintIdle = true -- Instantly go to idle_sprint instead of playing enter_sprint.
 SWEP.InstantSightIdle = false -- Instantly go to idle_sights instead of playing enter_sights.
 
 SWEP.Primary.Automatic = true

@@ -489,7 +489,7 @@ if SERVER then
         phys:SetMass(1)
 
         local ent, wep = self.Owner, self.Weapon
-        if !IsValid(ent) or !IsValid(wep) or !istable(self.data) or false then
+        if !IsValid(ent) or !IsValid(wep) or !istable(self.data) then
             self:Remove()
         else
             self:ConnectHands(ent, wep)
@@ -578,16 +578,19 @@ if SERVER then
         local ent, wep = self.Owner, self.Weapon
         if bool then
             if wep:Clip1() > 0 then
-                if self.shootedtime > CurTime() or !self.data.automatic and self.shooted or self:LookupAttachment('muzzle_flash') < 1 then return end
-                
-                local att = self:GetAttachment(self:LookupAttachment('muzzle_flash'))
+                if (self.shootedtime > CurTime() or !self.data.automatic and self.shooted) then return end
+                local attid, atthas = getMuzzle(self)
+                if (!atthas) then return end
+                local att = self:GetAttachment(attid)
                 local spr = wep.Spread
                 if wep.Num > 1 then
                     spr = spr/2
                 end
+                local maxdmg = wep.Damage_Max or wep.DamageMax
+                if (!maxdmg) then return end
                 local data = {
                     Attacker = ent,
-                    Damage = wep.Damage_Max*2,
+                    Damage = maxdmg*2,
                     Dir = att.Ang:Forward(),
                     Src = att.Pos-att.Ang:Forward()*4,
                     Force = 1,
@@ -601,7 +604,8 @@ if SERVER then
                 wep:SetClip1(wep:Clip1()-1)
                 self.shooted = true
                 self.shootedtime = CurTime()+(60/wep.RPM)+(self.data.extradelay or 0)
-                ent:EmitSound(isstring(wep.Sound_Shoot) and wep.Sound_Shoot or istable(wep.Sound_Shoot) and table.Random(wep.Sound_Shoot), wep.Vol_Shoot, math.random(100-wep.ShootPitchVariance,100+wep.ShootPitchVariance), 1, CHAN_WEAPON)
+                local soundshoot = wep.Sound_Shoot or wep.ShootSound
+                ent:EmitSound(isstring(soundshoot) and soundshoot or istable(soundshoot) and table.Random(soundshoot), wep.Vol_Shoot or wep.ShootVolume, math.random(100-(wep.ShootPitchVariance or wep.ShootPitchVariation),100+(wep.ShootPitchVariance or wep.ShootPitchVariation)), 1, CHAN_WEAPON)
                 ent:FireHand()
                 if wep:Clip1() == 0 then
                     self.shooted = false
