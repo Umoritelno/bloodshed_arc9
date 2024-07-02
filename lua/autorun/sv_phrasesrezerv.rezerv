@@ -1,0 +1,79 @@
+if SERVER then
+    util.AddNetworkString("PlaySoundForEveryone")
+    util.AddNetworkString("OpenSoundMenu") -- Добавляем эту строку для регистрации сетевой строки
+
+    net.Receive("PlaySoundForEveryone", function(len, ply)
+        local soundName = net.ReadString()
+        local soundPos = ply:GetPos() -- Получаем позицию игрока
+
+        -- Отправляем звук всем игрокам в радиусе 100 юнитов от позиции игрока
+        ply:EmitSound(soundName, 70)
+    end)
+
+    concommand.Add("sound_menu", function(ply, cmd, args)
+        net.Start("OpenSoundMenu")
+        net.Send(ply)
+    end)
+else
+    local phrases = {
+        {text = "some time, im dream about cheese", sound = "vo/npc/male01/question06.wav"},
+        {text = "RUN FOR YOUR LIFE", sound = "vo/npc/male01/runforyourlife01.wav"},
+        {text = "AAAH", sound = "vo/npc/male01/pain08.wav"},
+        {text = "folow me", sound = "vo/npc/male01/squad_away03.wav"},
+        {text = "yeah", sound = "vo/npc/male01/yeah02.wav"},
+        {text = "GET HELL OUT", sound = "vo/npc/male01/gethellout.wav"},
+        {text = "fantastic", sound = "vo/npc/male01/fantastic01.wav"},
+        {text = "excuse me", sound = "vo/npc/male01/excuseme02.wav"},
+        {text = "oh god...", sound = "vo/npc/male01/gordead_ans04.wav"},
+        {text = "hear, ammo", sound = "vo/npc/male01/ammo03.wav"},
+        {text = "get down (human)", sound = "vo/npc/male01/getdown02.wav"},
+        {text = "get on the ground police", sound = "custom/geton.wav"},
+        {text = "plese no...", sound = "vo/npc/male01/gordead_ans06.wav"},
+        -- Добавьте больше фраз и соответствующих звуковых файлов здесь
+    }
+
+    net.Receive("OpenSoundMenu", function(len, ply)
+        local frame = vgui.Create("DFrame")
+        frame:SetTitle("Phrase Menu")
+        frame:SetSize(250, 500)
+        frame:Center()
+        frame:MakePopup()
+
+        local DPanel = vgui.Create( "DScrollPanel", frame )
+        DPanel:SetPos( 0, 30 ) -- Set the position of the panel
+        DPanel:SetSize( 250, 500 ) -- Set the size of the panel
+        DPanel.Paint = function( self, w, h ) -- 'function Frame:Paint( w, h )' works too
+            draw.RoundedBox( 0, 0, 0, w, h, Color( 5, 5, 5, 225 ) )
+        end
+
+        local sbar = DPanel:GetVBar()
+        function sbar:Paint(w, h)
+            draw.RoundedBox(0, 0, 0, w, h, Color( 5, 5, 5, 225 ))
+        end
+        function sbar.btnUp:Paint(w, h)
+            draw.RoundedBox(0, 0, 0, w, h, Color( 5, 5, 5, 225 ))
+        end
+        function sbar.btnDown:Paint(w, h)
+            draw.RoundedBox(0, 0, 0, w, h, Color( 5, 5, 5, 225 ))
+        end
+        function sbar.btnGrip:Paint(w, h)
+            draw.RoundedBox(0, 0, 0, w, h, Color( 5, 5, 5, 225 ))
+        end
+
+        for _, phrase in pairs(phrases) do
+            local button = vgui.Create("DButton", DPanel)
+            button:SetText(phrase.text)
+            button:Dock(TOP)
+            button:DockMargin( 5, 5, 5, 0 )
+            button:SetSize( 180, 20 )
+            button.Paint = function( self, w, h )
+                draw.RoundedBox( 0, 0, 0, w, h, Color( 50, 50, 50, 155) )
+            end
+            button.DoClick = function()
+                net.Start("PlaySoundForEveryone")
+                net.WriteString(phrase.sound)
+                net.SendToServer()
+            end
+        end
+    end)
+end
