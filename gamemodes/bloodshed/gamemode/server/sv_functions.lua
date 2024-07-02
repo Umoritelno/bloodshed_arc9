@@ -297,7 +297,7 @@ function meta:ViewPunch(angle)
 end
 
 function meta:MakeRandomSound()
-	if self.RandomPlayerSound > CurTime() then return end
+	if (self.RandomPlayerSound or 0) > CurTime() then return end
 	self.RandomPlayerSound = CurTime() + math.random(60, 300)
 	local rnd, snd = math.random(1, 15), ""
 
