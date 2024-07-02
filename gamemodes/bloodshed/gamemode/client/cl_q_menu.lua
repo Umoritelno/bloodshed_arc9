@@ -27,7 +27,7 @@ local icons = {
 	{
 		material = Material("murdered/icons/scream.png"),
 		onClick = function()
-			LocalPlayer():ConCommand("mur_yell")
+			LocalPlayer():ConCommand("sound_menu")
 		end,
 		description = MuR.Language["use_3"]
 	},
