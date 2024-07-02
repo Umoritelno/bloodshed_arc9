@@ -925,7 +925,7 @@ hook.Add("SetupMove", "MuR_Move", function(ply, mv, cmd)
 			mv:SetMaxClientSpeed(40)
 		end
 	else
-		local rnd = AngleRand(-1, 1)
+		local rnd = AngleRand(-0.5, 0.5)
 		rnd.z = 0
 		ply:SetEyeAngles(ply:EyeAngles() + rnd)
 	end
