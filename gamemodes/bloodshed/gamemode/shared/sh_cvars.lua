@@ -141,6 +141,7 @@ function MuR:CountPlayerPolice()
 end
 
 function getMuzzle(wep) // TODO: поменять реализацию(больно уж глаза режет)
+	if !IsValid(wep) then return 0, false end
 	if (wep:LookupAttachment("muzzle_flash") > 0) then
 		return wep:LookupAttachment("muzzle_flash"), true
 	elseif (wep:LookupAttachment("muzzle") > 0) then 

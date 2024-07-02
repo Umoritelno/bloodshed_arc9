@@ -1,5 +1,7 @@
 AddCSLuaFile()
 
+SWEP.Base = "arc9_base"
+
 SWEP.Spawnable = true
 SWEP.Category = "ARC9"
 SWEP.SubCategory = nil
@@ -936,11 +938,11 @@ SWEP.SightMidPoint = { -- Where the gun should be at the middle of it's irons
 SWEP.HasSights = true
 
 -- Alternative "resting" position
-SWEP.ActivePos = Vector(0, -2, 0)
+SWEP.ActivePos = Vector(0, -3, 0)
 SWEP.ActiveAng = Angle(0, 0, 0)
 
 -- Position while walking/running (no sprint)
-SWEP.MovingPos = Vector(0, -2, 0)
+SWEP.MovingPos = Vector(0, 0, 0)
 SWEP.MovingAng = Angle(0, 0, 0)
 
 -- Position when crouching
@@ -1383,171 +1385,3 @@ SWEP.PCFs = {}
 SWEP.MuzzPCFs = {}
 
 SWEP.ActiveEffects = {}
-
-local searchdir = "weapons/arc9_base"
-
-local function autoinclude(dir)
-	local files, dirs = file.Find(searchdir .. "/*.lua", "LUA")
-
-	for _, filename in pairs(files) do
-		if filename == "shared.lua" then continue end
-		local luatype = string.sub(filename, 1, 2)
-
-		if luatype == "sv" then
-			if SERVER then
-				include(dir .. "/" .. filename)
-			end
-		elseif luatype == "cl" then
-			AddCSLuaFile(dir .. "/" .. filename)
-			if CLIENT then
-				include(dir .. "/" .. filename)
-			end
-		else
-			AddCSLuaFile(dir .. "/" .. filename)
-			include(dir .. "/" .. filename)
-		end
-	end
-
-	for _, path in pairs(dirs) do
-		autoinclude(dir .. "/" .. path)
-	end
-end
-
-autoinclude(searchdir)
-
-function SWEP:SetupDataTables()
-	self:NetworkVar("Float", 0, "RecoilAmount")
-	self:NetworkVar("Float", 1, "AnimLockTime")
-	self:NetworkVar("Float", 2, "NextIdle")
-	self:NetworkVar("Float", 3, "LastRecoilTime")
-	self:NetworkVar("Float", 4, "RecoilUp")
-	self:NetworkVar("Float", 5, "RecoilSide")
-	self:NetworkVar("Float", 6, "SprintAmount")
-	self:NetworkVar("Float", 7, "LastMeleeTime")
-	self:NetworkVar("Float", 8, "TriggerDelay")
-	--self:NetworkVar("Float", 8, "PrimedAttackTime")
-	--self:NetworkVar("Float", 9, "StartPrimedAttackTime")
-	self:NetworkVar("Float", 10, "ReloadFinishTime")
-	self:NetworkVar("Float", 11, "SightAmount")
-	self:NetworkVar("Float", 12, "HeatAmount")
-	self:NetworkVar("Float", 13, "MeleeAttackTime")
-	-- self:NetworkVar("Float", 13, "BlindFireAmount")
-	-- self:NetworkVar("Float", 14, "LastPressedETime")
-	self:NetworkVar("Float", 14, "FinishFiremodeAnimTime")
-	self:NetworkVar("Float", 15, "IKTimeLineStart")
-	self:NetworkVar("Float", 16, "IKTime")
-	self:NetworkVar("Float", 17, "HolsterTime")
-	self:NetworkVar("Float", 18, "BlindFireCornerAmount")
-	self:NetworkVar("Float", 19, "EnterBipodTime")
-	self:NetworkVar("Float", 20, "Breath")
-	self:NetworkVar("Float", 21, "SequenceCycle")
-	self:NetworkVar("Float", 22, "SequenceSpeed")
-	self:NetworkVar("Float", 23, "LastHolsterTime")
-	self:NetworkVar("Float", 24, "GrenadePrimedTime")
-	self:NetworkVar("Float", 25, "LockOnStartTime")
-	self:NetworkVar("Float", 26, "LeanAmount")
-	self:NetworkVar("Float", 27, "NearWallAmount")
-	self:NetworkVar("Float", 28, "ReadyTime")
-	-- self:NetworkVar("Float", 19, "LastPressedWTime")
-	-- self:NetworkVar("Float", 20, "TraversalSprintAmount")
-
-	self:NetworkVar("Int", 0, "BurstCount")
-	self:NetworkVar("Int", 1, "NthShot")
-	self:NetworkVar("Int", 2, "LoadedRounds")
-	self:NetworkVar("Int", 3, "Firemode")
-	self:NetworkVar("Int", 4, "NthReload")
-	self:NetworkVar("Int", 5, "MultiSight")
-	self:NetworkVar("Int", 6, "SequenceProxy")
-	-- self:NetworkVar("Int", 6, "BlindFireDirection")
-	self:NetworkVar("Int", 7, "HideBoneIndex")
-	self:NetworkVar("Int", 8, "SequenceIndex")
-	self:NetworkVar("Int", 9, "LeanState")
-	self:NetworkVar("Int", 10, "LastLoadedRounds")
-
-	self:NetworkVar("Bool", 0, "Customize")
-	self:NetworkVar("Bool", 1, "Reloading")
-	self:NetworkVar("Bool", 2, "EndReload")
-	self:NetworkVar("Bool", 3, "Safe")
-	self:NetworkVar("Bool", 4, "Jammed")
-	self:NetworkVar("Bool", 5, "Ready")
-	self:NetworkVar("Bool", 6, "TriggerDown")
-	self:NetworkVar("Bool", 7, "NeedTriggerPress")
-	self:NetworkVar("Bool", 8, "UBGL")
-	self:NetworkVar("Bool", 9, "EmptyReload")
-	self:NetworkVar("Bool", 10, "InSights")
-	self:NetworkVar("Bool", 11, "PrimedAttack")
-	-- self:NetworkVar("Bool", 12, "BlindFire")
-	self:NetworkVar("Bool", 12, "Bash2")
-	self:NetworkVar("Bool", 13, "NeedsCycle")
-	self:NetworkVar("Bool", 14, "Bipod")
-	self:NetworkVar("Bool", 15, "HeatLockout")
-	self:NetworkVar("Bool", 16, "LastWasSprinting")
-	self:NetworkVar("Bool", 17, "RequestReload")
-	self:NetworkVar("Bool", 18, "InMeleeAttack")
-	self:NetworkVar("Bool", 19, "OutOfBreath")
-	self:NetworkVar("Bool", 20, "Inspecting")
-	self:NetworkVar("Bool", 21, "AfterShot")
-	self:NetworkVar("Bool", 22, "GrenadePrimed")
-	self:NetworkVar("Bool", 23, "GrenadeTossing")
-	self:NetworkVar("Bool", 24, "GrenadeRecovering")
-	self:NetworkVar("Bool", 25, "LockedOn")
-	self:NetworkVar("Bool", 26, "MidMeleeAttack")
-	-- self:NetworkVar("Bool", 15, "TraversalSprint")
-
-	self:NetworkVar("Angle", 0, "FreeAimAngle")
-	self:NetworkVar("Angle", 1, "LastAimAngle")
-	self:NetworkVar("Angle", 2, "VisualRecoilAng")
-	self:NetworkVar("Angle", 3, "VisualRecoilVel")
-	self:NetworkVar("Angle", 4, "BipodAng")
-
-	self:NetworkVar("Vector", 0, "VisualRecoilPos")
-	self:NetworkVar("Vector", 1, "VisualRecoilPosVel")
-	self:NetworkVar("Vector", 2, "BipodPos")
-
-	self:NetworkVar("String", 0, "IKAnimation")
-
-	self:NetworkVar("Entity", 0, "Holster_Entity")
-	self:NetworkVar("Entity", 1, "LungeEntity")
-	self:NetworkVar("Entity", 2, "ShieldEntity")
-	self:NetworkVar("Entity", 3, "LockOnTarget")
-	self:NetworkVar("Entity", 4, "DetonatorEntity")
-
-	self:SetVisualRecoilAng(Angle(0, 0 ,0))
-	self:SetVisualRecoilVel(Angle(0, 0, 0))
-
-	self:SetVisualRecoilPos(Vector(0, 0, 0))
-	self:SetVisualRecoilPosVel(Vector(0, 0, 0))
-
-	self:SetMultiSight(1)
-	self:SetLastWasSprinting(false)
-	self:SetEnterBipodTime(0)
-	self:SetBreath(100)
-	self:SetOutOfBreath(false)
-	self:SetFiremode(1)
-	self:SetAfterShot(false)
-	self:SetGrenadePrimed(false)
-
-	self:SetRecoilUp(0)
-	self:SetRecoilSide(0)
-
-	self:SetLastRecoilTime(0)
-
-	self:SetAnimLockTime(0)
-	self:SetNextPrimaryFire(0)
-	self:SetNextSecondaryFire(0)
-	self:SetNextIdle(0)
-	self:SetRecoilAmount(0)
-	self:SetLastMeleeTime(0)
-	self:SetEnterBipodTime(0)
-	self:SetFinishFiremodeAnimTime(0)
-	self:SetReloadFinishTime(0)
-	self:SetLastHolsterTime(0)
-	self:SetNthReload(0)
-end
-
-function SWEP:SecondaryAttack()
-	if self:GetValue("UBGL") and self:GetProcessedValue("UBGLInsteadOfSights", true) then
-		self:ToggleUBGL(true)
-		self:DoPrimaryAttack()
-	end
-end
