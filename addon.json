@@ -1,0 +1,17 @@
+{
+  "title": "Bloodshed - Murder like Gamemode",
+  "type": "gamemode",
+  "tags": [
+    "fun",
+    "realism",
+    "roleplay"
+  ],
+  "ignore": [
+    "models/surrounded/decompiled/*",
+    "models/1/*",
+    "*.gif",
+    "1/*",
+    "models/ron/decompiled*",
+    "surrounded_lnr/*"
+  ]
+}
