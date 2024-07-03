@@ -461,7 +461,7 @@ SWEP.SecondarySupplyLimit = 2 -- Amount of reserve UBGL magazines you can take.
 
 
 
-SWEP.ForceDefaultClip = nil -- Set to force a default amount of ammo this gun can have. Otherwise, this is controlled by console variables.
+SWEP.ForceDefaultClip = true  -- Set to force a default amount of ammo this gun can have. Otherwise, this is controlled by console variables.
 
 
 

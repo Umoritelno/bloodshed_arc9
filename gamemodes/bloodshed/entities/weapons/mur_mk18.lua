@@ -184,7 +184,7 @@ SWEP.RecoilLookupTableOverrun = nil
 
 -- General recoil multiplier
 
-SWEP.Recoil = 1.25
+SWEP.Recoil = 1.5
 
 SWEP.RecoilKick = 2
 

@@ -691,7 +691,7 @@ SWEP.RecoilLookupTableOverrun = nil -- Repeatedly take values from this table if
 
 -- General recoil multiplier
 
-SWEP.Recoil = 1
+SWEP.Recoil = 1.2
 
 
 
@@ -1913,7 +1913,7 @@ SWEP.SprintPos = Vector(0, -4, -4)
 
 SWEP.SprintAng = Angle(0, 10, 0)
 
-SWEP.SprintVerticalOffset = true -- Moves vm when looking up/down while sprinting (set to false if gun clips into camera)
+SWEP.SprintVerticalOffset = false -- Moves vm when looking up/down while sprinting (set to false if gun clips into camera)
 
 SWEP.ReloadNoSprintPos = true -- No sprintpos during reloads
 
@@ -2547,7 +2547,7 @@ SWEP.Animations = {
 
 		Source = "base_fire",
 
-		Mult = 0.8,
+		Mult = 1.2,
 
 	},
 
@@ -2770,17 +2770,3 @@ SWEP.DrawCrosshair = true
 
 
 SWEP.ARC9 = true
-
-
-
-SWEP.m_bPlayPickupSound = false
-
-
-
-SWEP.PCFs = {}
-
-SWEP.MuzzPCFs = {}
-
-
-
-SWEP.ActiveEffects = {}

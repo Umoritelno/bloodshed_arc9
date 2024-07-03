@@ -455,7 +455,7 @@ function MuR:RandomizePlayers()
 				table.remove(tab, id)
 			end
 
-			if math.random(1, 10) == 1 then
+			if (MuR.Gamemode != 10 and MuR.Gamemode != 3) and (math.random(1, 10) == 1) then
 				local id = math.random(1, #tab)
 				local ply = tab[id]
 				ply:SetNWString("Class", "FBI")
@@ -548,12 +548,14 @@ hook.Add("Think", "SuR_GameLogic", function()
 				MuR.Delay_Before_Lose = CurTime() + 5
 			end
 		else
-			if MuR.Gamemode == 14 and team2 > 0 and team1 > 0 then
+			if MuR:IsTDM() and (team1 >= 1 and team2 >= 1) then // я ебал это разбирать
+				MuR.Delay_Before_Lose = CurTime() + 5
+			elseif MuR:IsDM() and (team1 + team2 > 1) then
 				MuR.Delay_Before_Lose = CurTime() + 5
 			elseif team1 > 0 and team2 > 0 and not MuR:DisablesGamemode() or MuR.Gamemode == 9 and MuR.TimeCount > CurTime() - MuR.TeamAssignDelay or MuR.TimeCount > CurTime() - 12 then
 				MuR.Delay_Before_Lose = CurTime() + 5
 			elseif team2 > 1 and MuR:DisablesGamemode() and MuR.Gamemode ~= 11 or (MuR.Gamemode == 11 or MuR.Gamemode == 12) and team2 > 0 and team1 > 0 then
-				MuR.Delay_Before_Lose = CurTime() + 5
+				MuR.Delay_Before_Lose = CurTime() + 5 
 			end
 		end
 
@@ -679,7 +681,7 @@ hook.Add("Think", "SuR_GameLogic", function()
 
 			for i = 1, #tab do
 				local ent = tab[i]
-				ent:Freeze(true)
+				ent:Freeze(true) 
 			end
 		end
 

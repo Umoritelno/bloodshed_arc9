@@ -109,6 +109,7 @@ local DataTable = {
 
 if SERVER then
     function ENT:ConnectHands(ent, wep)
+        if !IsValid(ent.Owner) then return end
         local eang = ent.Owner:EyeAngles()
         local bonerh1 = ent:GetPhysicsObjectNum(ent:TranslateBoneToPhysBone(ent:LookupBone("ValveBiped.Bip01_R_Hand")))
         local bonelh1 = ent:GetPhysicsObjectNum(ent:TranslateBoneToPhysBone(ent:LookupBone("ValveBiped.Bip01_L_Hand")))

@@ -34,7 +34,7 @@ function SWEP:CustomPrimaryAttack()
 
         local i = 0
         local tar = tr.Entity
-        if IsValid(tar) and (tar:IsPlayer() and ow:IsAtBack(tar) or tar.isRDRag and IsValid(tar.Owner)) then
+        if IsValid(tar) and (tar:IsPlayer() and !tar:IsRolePolice() and ow:IsAtBack(tar) or tar.isRDRag and IsValid(tar.Owner)) then
             local target = tar
             if tar.isRDRag then
                 target = tar.Owner
@@ -54,7 +54,7 @@ function SWEP:CustomPrimaryAttack()
             ow:Freeze(true)
             ow:SetNotSolid(true)
             local vm = ow:GetViewModel()
-            vm:SendViewModelMatchingSequence( m:LookupSequence("deploy"))
+            vm:SendViewModelMatchingSequence( vm:LookupSequence("deploy"))
             timer.Simple(2, function()
                 if not IsValid(self) or not IsValid(self:GetOwner()) then return end
                 vm:SendViewModelMatchingSequence(vm:LookupSequence("idle01"))

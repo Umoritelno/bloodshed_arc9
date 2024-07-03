@@ -130,8 +130,8 @@ end)
 
 hook.Add("EntityTakeDamage", "MuR_NoCollisionNPCs", function(ent, dmg)
 	local att = dmg:GetAttacker()
-	local allow1 = ent:IsNPC() and ent.IsPolice or ent:IsPlayer() and ent:IsRolePolice()
-	local allow2 = att:IsNPC() and att.IsPolice or att:IsPlayer() and att:IsRolePolice()
+	local allow1 = ent:IsNPC() and ent.IsPolice or ent:IsPlayer() and (ent:IsRolePolice() and !ent:IsRoleSWAT())
+	local allow2 = att:IsNPC() and att.IsPolice or att:IsPlayer() and (ent:IsRolePolice() and !ent:IsRoleSWAT())
 	if allow1 and allow2 then
 		return true
 	end

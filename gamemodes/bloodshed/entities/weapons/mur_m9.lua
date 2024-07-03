@@ -309,19 +309,19 @@ SWEP.LegDamage = 1
 
 SWEP.BodyDamageMults = {
 
-    [HITGROUP_HEAD] = 2.5,
+    [HITGROUP_HEAD] = 2,
 
-    [HITGROUP_CHEST] = 1.25,
+    [HITGROUP_CHEST] = 1,
 
     [HITGROUP_STOMACH] = 1,
 
-    [HITGROUP_LEFTARM] = 1,
+    [HITGROUP_LEFTARM] = 0.8,
 
-    [HITGROUP_RIGHTARM] = 1,
+    [HITGROUP_RIGHTARM] = 0.8,
 
-    [HITGROUP_LEFTLEG] = 0.9,
+    [HITGROUP_LEFTLEG] = 0.7,
 
-    [HITGROUP_RIGHTLEG] = 0.9,
+    [HITGROUP_RIGHTLEG] = 0.7,
 
 }
 

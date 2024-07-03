@@ -54,6 +54,13 @@ local blood_decals = {
 }
 
 local bleed_timer_name = "ZippyGore3_LimbBleedEffectTimer"
+local table_count = table.Count
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CheckIfAlLGibed()
+	if !self.ZippyGoreMod3_GibbedPhysBones or !self.ZippyGoreMod3_PhysBoneHPs then return false end
+	return table_count(self.ZippyGoreMod3_GibbedPhysBones) == table_count(self.ZippyGoreMod3_PhysBoneHPs)
+end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZippyGoreMod3_BleedEffect(phys_bone)
@@ -334,6 +341,10 @@ function ENT:ZippyGoreMod3_BreakPhysBone(phys_bone_idx, data)
 	if phys_bone_idx == 0 then
 		-- Remove ragdoll if root bone is gibbed:
 		self:Remove()
+		if self.Owner and IsValid(self.Owner) then
+			print("KILLED PLAYER WITHOUT ROOT BONE", self.Owner:Nick())
+			self.Owner:Kill()
+		end
 	elseif blood_particles[self.ZippyGoreMod3_BloodColor] then
 		-- Otherwise do a bleeding effect from the severed part:
 		self:ZippyGoreMod3_BleedEffect(phys_bone_idx)

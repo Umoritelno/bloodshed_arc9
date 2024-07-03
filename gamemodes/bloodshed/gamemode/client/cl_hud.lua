@@ -672,8 +672,14 @@ local function ShowAnnounce(type, ent)
 	elseif type == "innocent_att_kill" then
 		text = MuR.Language["announce_attkill"]
 		font = "MuR_Font2"
+	elseif type == "teammate_kill" then
+		text = MuR.Language["announce_teamkill"]
+		font = "MuR_Font2"
 	elseif type == "money_cancel" then
 		text = MuR.Language["announce_moneycancel"]
+		font = "MuR_Font2"
+	elseif type == "money_limit" then
+		text = MuR.Language["announce_moneymax"]
 		font = "MuR_Font2"
 	elseif type == "spawn_damage" then
 		text = MuR.Language["announce_spawndamage"]

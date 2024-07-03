@@ -125,7 +125,7 @@ end)
 hook.Add("EntityTakeDamage", "!EnhancedSplatter", function( ent, dmginfo )
 	if !ent:GetNWBool("DynSplatter") then return end
 
-	local tab = {dmginfo:GetAttacker(), dmginfo:GetInflictor() or game.GetWorld(), dmginfo:GetDamage(), dmginfo:GetDamageType(), dmginfo:GetDamageForce(), dmginfo:GetDamagePosition()}
+	local tab = {IsValid(dmginfo:GetAttacker()) and dmginfo:GetAttacker() or ent, IsValid(dmginfo:GetInflictor()) and dmginfo:GetInflictor() or game.GetWorld(), dmginfo:GetDamage(), dmginfo:GetDamageType(), dmginfo:GetDamageForce(), dmginfo:GetDamagePosition()}
 
 	timer.Simple(0.001, function()
 		if !IsValid(ent) then return end

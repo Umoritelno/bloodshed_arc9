@@ -408,6 +408,7 @@ end
 
 function SWEP:DoBFSAnimation(anim)
 	local vm = self:GetOwner():GetViewModel()
+	if !IsValid(vm) then return end
 	vm:SendViewModelMatchingSequence(vm:LookupSequence(anim))
 end
 

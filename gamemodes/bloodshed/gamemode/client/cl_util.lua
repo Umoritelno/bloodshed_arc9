@@ -12,10 +12,9 @@ net.Receive("MuR.EntityPlayerColor", function()
 end)
 
 hook.Add("Think", "MuR_Execute", function()
-	RunConsoleCommand("tacrp_drawhud", 0)
-	RunConsoleCommand("tacrp_hud_ammo_number", 0)
-	RunConsoleCommand("tacrp_hints", 0)
-	RunConsoleCommand("tacrp_drawholsters", 0)
+	RunConsoleCommand("arc9_hud_arc9", 0)
+	RunConsoleCommand("arc9_autolean", 0)
+	//RunConsoleCommand("arc9_tpik",1) // TODO: Поменять позиции TPIK у оружия, чтобы пофиксить выкрут запястий и удлиннение рук
 	RunConsoleCommand("r_decals", 9999)
 end)
 

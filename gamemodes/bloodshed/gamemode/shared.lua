@@ -3,6 +3,7 @@ MuR = MuR or {}
 MuR.shared("shared/sh_cvars.lua")
 MuR.shared("shared/sh_rd.lua")
 MuR.shared("shared/sh_woundfix.lua")
+MuR.shared("shared/sh_shop.lua")
 MuR.shared("zippy_gore/zippygoremod3.lua")
 MuR.shared("zippy_blood/zippy_dynamic_blood_splatter.lua")
 
@@ -79,6 +80,7 @@ MuR.Shop = {
 			func = function(ply)
 				ply:GiveWeapon(table.Random(ftab))
 			end,
+			max = 10,
 		},
 		{
 			name = "Flashlight",
@@ -169,6 +171,7 @@ MuR.Shop = {
 			func = function(ply)
 				ply:GiveWeapon("mur_p99_hol")
 			end,
+			max = 5,
 		},
 		{
 			name = "Ammo",
@@ -267,6 +270,7 @@ MuR.Shop = {
 			func = function(ply)
 				ply:GiveWeapon("mur_f1")
 			end,
+			max = 10,
 		},
 		{
 			name = "M67 Grenade",
@@ -275,6 +279,7 @@ MuR.Shop = {
 			func = function(ply)
 				ply:GiveWeapon("mur_m67")
 			end,
+			max = 10,
 		},
 		{
 			name = "MR96",
@@ -283,6 +288,7 @@ MuR.Shop = {
 			func = function(ply)
 				ply:GiveWeapon("mur_mr96")
 			end,
+			max = 10,
 		},
 		{
 			name = "IED",

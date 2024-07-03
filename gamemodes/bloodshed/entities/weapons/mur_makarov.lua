@@ -1909,7 +1909,7 @@ SWEP.RestAng = Angle(-4.633, 36.881, 0)
 
 -- Overrides RestPos/Ang but only for sprinting
 
-SWEP.SprintPos = Vector(0, -4, 0)
+SWEP.SprintPos = Vector(0, -4, -4)
 
 SWEP.SprintAng = Angle(0, 10, 0)
 

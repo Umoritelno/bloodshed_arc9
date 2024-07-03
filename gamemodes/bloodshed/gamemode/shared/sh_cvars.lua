@@ -15,6 +15,10 @@ function meta2:IsRolePolice()
 	return self:GetNWString('Class') == "Riot" or self:GetNWString('Class') == "Officer" or self:GetNWString('Class') == "SWAT" or self:GetNWString('Class') == "ArmoredOfficer"
 end
 
+function meta2:IsRoleSWAT(arguments)
+	return self:GetNWString('Class') == "SWAT"
+end
+
 function meta2:HaveStability()
 	return self:GetNWString('Class') == "Killer" or self:GetNWString('Class') == "Traitor"
 end
@@ -105,6 +109,14 @@ function MuR:VisibleByPlayers(ply, ent1)
 	end
 
 	return false
+end 
+
+function MuR:IsTDM()
+	return MuR.Gamemode == 11 or MuR.Gamemode == 12 or MuR.Gamemode == 14
+end
+
+function MuR:IsDM()
+	return MuR.Gamemode == 5
 end
 
 function MuR:DisablesGamemode()

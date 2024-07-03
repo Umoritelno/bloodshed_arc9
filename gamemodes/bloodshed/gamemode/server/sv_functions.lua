@@ -215,7 +215,7 @@ function meta:GiveWeapon(class, cantdrop)
 		ent.GiveToPlayer = self
 		ent.CantDrop = cantdrop
 
-		if ent.ArcticTacRP then
+		if ent.ArcticTacRP or ent.ARC9 then
 			ent.Primary.DefaultClip = 0
 		end
 
@@ -491,6 +491,7 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 	ply.TakeDamageTime = 0
 	ply.UnInnocentTime = 0
 	ply.HungerDelay = CurTime() + 5
+	ply.ShopBoughtItems = {}
 	local pos = nil
 
 	if math.random(1, 5) == 1 then
@@ -961,13 +962,16 @@ function GM:PlayerDeath(ply, inf, att)
 		if !IsValid(ply) then return end
 		local att2 = ply.LastAttacker
 		if IsValid(att2) and att2:IsPlayer() then
-			if ply:Team() == 2 and att2:Team() == 2 and MuR.Gamemode ~= 5 and MuR.Gamemode ~= 11 and MuR.Gamemode ~= 12 and ply ~= att2 then
+			if (ply:Team() == 2 and att2:Team() == 2 and ply ~= att2) and MuR.Gamemode ~= 5 and MuR.Gamemode ~= 11 and MuR.Gamemode ~= 12 then
 				if ply.UnInnocentTime < CurTime() then
 					att2:ChangeGuilt(4)
 					MuR:GiveAnnounce("innocent_kill", att2)
 				else
 					MuR:GiveAnnounce("innocent_att_kill", att2)
 				end
+			elseif MuR:IsTDM() and (ply:Team() == att2:Team() and ply != att2) then
+				att2:ChangeGuilt(4)
+				MuR:GiveAnnounce("teammate_kill", att2)
 			end
 			if att2:IsKiller() and not ply:IsKiller() then
 				att2:SetNWFloat("Stability", math.Clamp(att2:GetNWFloat("Stability")+50, 0, 100)) 
@@ -1435,15 +1439,18 @@ end)
 
 hook.Add("AllowPlayerPickup", "MuR_WeaponsFuck", function(ply, ent)
 	if ent:IsWeapon() then
-		ply:PickupWeapon(ent)
+		local result = ply:PickupWeapon(ent)
 
 		if ent:GetMaxClip1() > 0 then
+			if !result then
+				ply:SelectWeapon(ent:GetClass())
+			elseif ent.Ammo then
+				ply:GiveAmmo(ent:Clip1(),ent.Ammo)
+			end
 			ply:EmitSound("items/ammo_pickup.wav", 60)
 		else
 			ply:EmitSound("Flesh.ImpactSoft", 55)
 		end
-
-		ply:SelectWeapon(ent:GetClass())
 
 		if ent.Poison then
 			ent.Poison = false
@@ -1456,9 +1463,8 @@ end)
 hook.Add("PlayerCanPickupWeapon", "MuR_WeaponsFuck", function(ply, weapon)
 	local ent = weapon.GiveToPlayer
 
-	if IsValid(ent) and ply == ent or weapon.ArcticTacRP then
+	if IsValid(ent) and ply == ent then
 		weapon.GiveToPlayer = nil
-
 		return true
 	else
 		return false

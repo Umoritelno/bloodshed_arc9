@@ -203,7 +203,7 @@ function pl:CreateAdvancedRagdoll()
 end
 
 function pl:CanRagdoll()
-	return !(self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") or self:GetSVAnimation() != "")
+	return !(self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") or string.StartsWith(self:GetSVAnimation(),"mur_getup") or MuR.Ending)
 end
 
 function pl:StartRagdolling(moans, dam, gibs)
@@ -880,7 +880,7 @@ hook.Add("PlayerSwitchWeapon", "MuR_ChangeWeaponInRagdoll", function(ply, oldwep
 		return true
 	end
 	local rag = ply:GetRD()
-	if IsValid(rag) then
+	if (IsValid(rag) and rag.Weapon.Weapon:GetClass() != wep:GetClass()) then
 		ply:GiveRagdollWeapon(rag, wep)
 	end
 end)
