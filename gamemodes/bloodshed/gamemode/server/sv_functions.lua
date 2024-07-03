@@ -877,7 +877,7 @@ hook.Add("SetupMove", "MuR_Move", function(ply, mv, cmd)
 			ply:SetNWFloat("Stamina", math.Clamp(stam + FrameTime() / 0.2, 0, 100))
 			ply.RunMult = 0
 		else
-			ply:SetNWFloat("Stamina", math.Clamp(stam + FrameTime(), 0, 100))
+			ply:SetNWFloat("Stamina", math.Clamp(stam + FrameTime() / 0.85, 0, 100))
 			ply.RunMult = 0
 		end
 
@@ -901,7 +901,7 @@ hook.Add("SetupMove", "MuR_Move", function(ply, mv, cmd)
 			ply:SetJumpPower(80)
 		end
 
-		if stam <= 0 and (ply:WaterLevel() == 3 or IsValid(ply:GetRD()) and ply:GetRD():WaterLevel() == 3) then
+		if stam and stam <= 0 and (ply:WaterLevel() == 3 or IsValid(ply:GetRD()) and ply:GetRD():WaterLevel() == 3) then
 			if ply.TakeDamageTime < CurTime() then
 				ply.TakeDamageTime = CurTime() + 1
 				ply:TakeDamage(5)
@@ -1442,14 +1442,16 @@ hook.Add("AllowPlayerPickup", "MuR_WeaponsFuck", function(ply, ent)
 		local result = ply:PickupWeapon(ent)
 
 		if ent:GetMaxClip1() > 0 then
-			if !result then
+			if !result and (ent.Ammo or ent.Primary.Ammo) then
+				ply:GiveAmmo(ent:Clip1(),ent.Ammo or ent.Primary.Ammo)
+				ent:Remove()
+			else 
 				ply:SelectWeapon(ent:GetClass())
-			elseif ent.Ammo then
-				ply:GiveAmmo(ent:Clip1(),ent.Ammo)
 			end
 			ply:EmitSound("items/ammo_pickup.wav", 60)
 		else
 			ply:EmitSound("Flesh.ImpactSoft", 55)
+			ply:SelectWeapon(ent:GetClass())
 		end
 
 		if ent.Poison then

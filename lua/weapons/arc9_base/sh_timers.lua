@@ -39,7 +39,6 @@ function SWEP:KillSoundTable()
             table.insert(keeptimers, v)
         end
     end
-    PrintTable(keeptimers)
     self.ActiveTimers = keeptimers
 end
 

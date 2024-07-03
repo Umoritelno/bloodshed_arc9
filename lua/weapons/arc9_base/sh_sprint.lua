@@ -1,3 +1,5 @@
+local hungerdisablesprintanim = 50
+
 function SWEP:GetSprintToFireTime()
     local owner = self:GetOwner()
     local slidingmult = (owner.GetSliding and owner:GetSliding()) and 0.66 or 1
@@ -40,7 +42,6 @@ end
 
 function SWEP:GetIsSprintingCheck()
     local owner = self:GetOwner()
-
     if !owner:IsValid() or owner:IsNPC() then
         return false
     end
@@ -51,6 +52,7 @@ function SWEP:GetIsSprintingCheck()
     if !owner:KeyDown(IN_SPEED) then return false end
     if !owner:OnGround() or owner:GetMoveType() == MOVETYPE_NOCLIP then return false end
     if !owner:KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then return false end
+    if (owner:GetNWFloat('Hunger') < hungerdisablesprintanim) then return false end
 
     if (self:GetAnimLockTime() > CurTime()) and self:GetProcessedValue("NoSprintWhenLocked", true) then
         return false

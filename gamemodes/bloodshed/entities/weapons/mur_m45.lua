@@ -2547,7 +2547,7 @@ SWEP.Animations = {
 
 		Source = "base_fire",
 
-		Mult = 1.2,
+		Mult = 0.8,
 
 	},
 

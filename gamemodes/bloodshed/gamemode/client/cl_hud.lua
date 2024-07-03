@@ -7,6 +7,9 @@ MuR.Data["PoliceArriveTime"] = 0
 MuR.Data["War"] = false
 MuR.Data["ExfilPos"] = Vector()
 
+local stalker = Material("murdered/stalker.jpg","noclamp")
+local stalkeralpha = 0
+
 net.Receive("MuR.SendDataToClient", function()
 	local str = net.ReadString()
 	local value = net.ReadTable()[1]
@@ -16,6 +19,10 @@ end)
 net.Receive("MuR.PlaySoundOnClient", function()
 	local str = net.ReadString()
 	surface.PlaySound(str)
+end)
+
+net.Receive("ulx.stalker",function()
+	stalkeralpha = 1
 end)
 
 local hide = {
@@ -61,7 +68,7 @@ end)
 
 hook.Add("DrawDeathNotice", "DisableKillfeed", function() return 0, 0 end)
 hook.Add("PlayerStartVoice", "ImageOnVoice", function(ply) 
-	return ply == LocalPlayer() and false or not LocalPlayer():IsAdmin() or ply:Alive()
+	return ply == LocalPlayer() and false or not LocalPlayer():IsAdmin() or (IsValid(ply) and ply:Alive())
 end)
 
 local detector_delay = 0
@@ -1210,6 +1217,13 @@ end
 
 function GM:HUDDrawPickupHistory()
 end
+
+hook.Add("DrawOverlay","ulx.stalker",function()
+	stalkeralpha = math.Clamp(stalkeralpha - FrameTime() * 0.3,0,1)
+	surface.SetDrawColor(255,255,255,stalkeralpha * 255)
+	surface.SetMaterial(stalker)
+	surface.DrawTexturedRect(0,0,ScrW(),ScrH())
+end)
 
 ---------------------------------------------------------------------------------------------------------------------
 

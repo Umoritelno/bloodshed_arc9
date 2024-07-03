@@ -200,10 +200,10 @@ function pl:CreateAdvancedRagdoll()
 	self:GiveRagdollWeapon(ent, self:GetActiveWeapon())
 
 	return ent
-end
+end 
 
 function pl:CanRagdoll()
-	return !(self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") or string.StartsWith(self:GetSVAnimation(),"mur_getup") or MuR.Ending)
+	return !(self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") or string.StartsWith(self:GetSVAnimation(),"mur_getup") or MuR.TimeCount + 22 > CurTime() or MuR.Ending) 
 end
 
 function pl:StartRagdolling(moans, dam, gibs)
@@ -876,11 +876,12 @@ end
 ------------------------HOOKS-----------------------------------
 
 hook.Add("PlayerSwitchWeapon", "MuR_ChangeWeaponInRagdoll", function(ply, oldwep, wep)
-	if (MuR.Gamemode == 5 or MuR.Gamemode == 11 or MuR.Gamemode == 12) and MuR.TimeCount + 22 > CurTime() or ply:GetNWString("Class") == "Zombie" and IsValid(wep) and wep:GetClass() != "mur_zombie" then
+	if (MuR.Gamemode == 5 or MuR.Gamemode == 11 or MuR.Gamemode == 12) and MuR.TimeCount + 22 > CurTime() or MuR.TimeCount + 12 > CurTime() or ply:GetNWString("Class") == "Zombie" and IsValid(wep) and wep:GetClass() != "mur_zombie" then
 		return true
 	end
 	local rag = ply:GetRD()
-	if (IsValid(rag) and rag.Weapon.Weapon:GetClass() != wep:GetClass()) then
+	local curwep = ply:GetNWEntity("RD_Weapon")
+	if (IsValid(rag) and !IsValid(curwep) or (IsValid(curwep) and curwep.Weapon:GetClass() != wep:GetClass())) then
 		ply:GiveRagdollWeapon(rag, wep)
 	end
 end)
