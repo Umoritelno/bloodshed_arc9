@@ -42,7 +42,7 @@ local function CreateFinishPanel(type, isvote)
 	elseif type == "traitor" then
 		text = MuR.Language["traitorwin"]
 	end
-
+	if !IsValid(LocalPlayer()) then return end // игрок не успел прогрузиться, скипаем
 	if LocalPlayer():GetNWFloat('DeathStatus') == 0 then
 		plytext = MuR.Language["yousurvived"]
 		surface.PlaySound("murdered/theme/win_theme.wav")
