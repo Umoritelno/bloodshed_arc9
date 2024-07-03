@@ -172,9 +172,14 @@ function MuR:SpawnPlayerPolice(assault)
 		ply:Spawn()
 		ply:ScreenFade(SCREENFADE.IN, color_black, 1, 1)
 		local pos = MuR:GetRandomPos(false)
-
+ 
 		if not isvector(pos) then
 			pos = MuR:GetRandomPos(true)
+		end
+
+		if (!isvector(pos)) then
+			print("FAILED TO SPAWN PLAYER AS POLICE (INVALID POSITION)")
+			continue 
 		end
 
 		ply:SetPos(pos)
@@ -548,7 +553,7 @@ hook.Add("Think", "SuR_GameLogic", function()
 				MuR.Delay_Before_Lose = CurTime() + 5
 			end
 		else
-			if MuR:IsTDM() and (team1 >= 1 and team2 >= 1) then // я ебал это разбирать
+			if MuR:IsTDM() and (team1 > 0 and team2 > 0) then // я ебал это разбирать
 				MuR.Delay_Before_Lose = CurTime() + 5
 			elseif MuR:IsDM() and (team1 + team2 > 1) then
 				MuR.Delay_Before_Lose = CurTime() + 5

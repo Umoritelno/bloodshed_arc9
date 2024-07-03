@@ -1,9 +1,5 @@
 MuR = MuR or {}
 
-function GM:Initialize()
-	RunConsoleCommand("arc9_mult_defaultammo", 0)
-end
-
 MuR.shared("shared/sh_cvars.lua")
 MuR.shared("shared/sh_rd.lua")
 MuR.shared("shared/sh_woundfix.lua")

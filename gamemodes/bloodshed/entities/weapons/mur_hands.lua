@@ -82,6 +82,7 @@ function SWEP:Initialize()
 end
 
 function SWEP:Deploy()
+	if !IsValid(self:GetOwner()) then return end
 	if not IsFirstTimePredicted() then
 		self:DoBFSAnimation("fists_draw")
 		self:GetOwner():GetViewModel():SetPlaybackRate(.1)

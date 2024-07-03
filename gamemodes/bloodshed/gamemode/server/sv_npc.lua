@@ -120,18 +120,18 @@ end
 
 hook.Add("ShouldCollide", "MuR_NoCollisionNPCs", function(ent1, ent2)
 	if ent1 == ent2 then return false end
-	local allow1 = ent1:IsNPC() and ent1.IsPolice and not ent1.DoingPlayAnim or ent1:IsPlayer() and ent1:IsRolePolice()
-	local allow2 = ent2:IsNPC() and ent2.IsPolice and not ent1.DoingPlayAnim or ent2:IsPlayer() and ent2:IsRolePolice()
+	local allow1 = ent1:IsNPC() and ent1.IsPolice and not ent1.DoingPlayAnim or (ent1:IsRolePolice() and !ent1:IsRoleSWAT())
+	local allow2 = ent2:IsNPC() and ent2.IsPolice and not ent2.DoingPlayAnim or (ent2:IsRolePolice() and !ent2:IsRoleSWAT())
 	if allow1 and allow2 then
 		PushApart(ent1, ent2)
 		return false
 	end
 end)
 
-hook.Add("EntityTakeDamage", "MuR_NoCollisionNPCs", function(ent, dmg)
+hook.Add("EntityTakeDamage", "MuR_NoCollisionNPCs", function(ent, dmg) // TODO: Убрать коллизию игрокам онли с нпс
 	local att = dmg:GetAttacker()
 	local allow1 = ent:IsNPC() and ent.IsPolice or ent:IsPlayer() and (ent:IsRolePolice() and !ent:IsRoleSWAT())
-	local allow2 = att:IsNPC() and att.IsPolice or att:IsPlayer() and (ent:IsRolePolice() and !ent:IsRoleSWAT())
+	local allow2 = att:IsNPC() and att.IsPolice or att:IsPlayer() and (att:IsRolePolice() and !att:IsRoleSWAT())
 	if allow1 and allow2 then
 		return true
 	end

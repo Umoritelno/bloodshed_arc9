@@ -4,6 +4,15 @@ local M = {}
 local SIZEOF_INT = 4
 local SIZEOF_SHORT = 2
 local AINET_VERSION_NUMBER = 37
+local need_to_restart = false
+
+hook.Add("InitPostEntity","MuR.Nodegraphfix",function()
+	timer.Simple(10,function()
+		if (need_to_restart) then
+			RunConsoleCommand("changelevel",game.GetMap())
+		end
+	end)
+end)
 
 local function toUShort(b)
 	local i = {string.byte(b, 1, SIZEOF_SHORT)}
@@ -30,7 +39,11 @@ end
 
 if found_ai_nodes then return end
 f = file.Open("maps/graphs/" .. game.GetMap() .. ".ain", "rb", "GAME")
-if not f then return end
+if not f then 
+	print("MAP DOESNT HAVE AI NODES. RESTARTING...")  
+	need_to_restart = true
+	return 
+end
 found_ai_nodes = true
 local ainet_ver = ReadInt(f)
 local map_ver = ReadInt(f)

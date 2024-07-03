@@ -1,9 +1,10 @@
 hook.Add("InitPostEntity", "MuR.Run", function()
 	RunConsoleCommand("zbase_ply_hurt_ally", 1)
 	RunConsoleCommand("sv_alltalk", 1)
-	RunConsoleCommand("tacrp_free_atts", 0)
-	RunConsoleCommand("tacrp_hud", 0)
-	RunConsoleCommand("tacrp_visibleholster", 0)
+	//RunConsoleCommand("tacrp_free_atts", 0)
+	//RunConsoleCommand("", 0)
+	//RunConsoleCommand("tacrp_visibleholster", 0)
+	RunConsoleCommand("arc9_mult_defaultammo", 0)
 end)
 
 net.Receive("MuR.VoiceLines", function(len, ply)

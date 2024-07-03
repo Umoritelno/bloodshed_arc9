@@ -203,7 +203,7 @@ function pl:CreateAdvancedRagdoll()
 end 
 
 function pl:CanRagdoll()
-	return !(self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") or string.StartsWith(self:GetSVAnimation(),"mur_getup") or MuR.TimeCount + 22 > CurTime() or MuR.Ending) 
+	return !(self:GetNWString("Class") == "Zombie" or self:GetNWBool("GeroinUsed") or MuR.TimeCount + 12 > CurTime() or MuR.Ending or string.find(self:GetSVAnimation(),"arrest") or string.StartsWith(self:GetSVAnimation(),"execution")) // TODO: хуйня способ, надо переделать
 end
 
 function pl:StartRagdolling(moans, dam, gibs)
