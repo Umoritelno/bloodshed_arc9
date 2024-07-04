@@ -14,7 +14,7 @@ end)
 hook.Add("Think", "MuR_Execute", function()
 	RunConsoleCommand("arc9_hud_arc9", 0)
 	RunConsoleCommand("arc9_autolean", 0)
-	//RunConsoleCommand("arc9_tpik",1) // TODO: Поменять позиции TPIK у оружия, чтобы пофиксить выкрут запястий и удлиннение рук
+	RunConsoleCommand("arc9_tpik",0) // TODO: Поменять позиции TPIK у оружия, чтобы пофиксить выкрут запястий и удлиннение рук
 	RunConsoleCommand("r_decals", 9999)
 end)
 
