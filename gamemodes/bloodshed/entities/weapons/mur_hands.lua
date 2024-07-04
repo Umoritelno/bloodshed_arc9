@@ -82,11 +82,13 @@ function SWEP:Initialize()
 end
 
 function SWEP:Deploy()
-	if !IsValid(self:GetOwner()) or !IsValid(self:GetOwner():GetViewModel()) then return end // у некоторых игроков вьюмодел это NULL энтити
+	if !IsValid(self:GetOwner()) then return end
 	if not IsFirstTimePredicted() then
 		self:DoBFSAnimation("fists_draw")
-		self:GetOwner():GetViewModel():SetPlaybackRate(.1)
-
+   local vm = self:GetOwner():GetViewModel()
+   if IsValid(vm) then // у некоторых игроков вьюмодел равен NULL
+		    vm:SetPlaybackRate(.1)
+   end
 		return
 	end
 
