@@ -970,7 +970,7 @@ function GM:PlayerDeath(ply, inf, att)
 					MuR:GiveAnnounce("innocent_att_kill", att2)
 				end
 			elseif MuR:IsTDM() and (ply:Team() == att2:Team() and ply != att2) then
-				att2:ChangeGuilt(4)
+				att2:ChangeGuilt(1.5)
 				MuR:GiveAnnounce("teammate_kill", att2)
 			end
 			if att2:IsKiller() and not ply:IsKiller() then
