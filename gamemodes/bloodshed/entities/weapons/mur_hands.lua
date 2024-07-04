@@ -82,7 +82,7 @@ function SWEP:Initialize()
 end
 
 function SWEP:Deploy()
-	if !IsValid(self:GetOwner()) then return end
+	if !IsValid(self:GetOwner()) or !IsValid(self:GetOwner():GetViewModel()) then return end // у некоторых игроков вьюмодел это NULL энтити
 	if not IsFirstTimePredicted() then
 		self:DoBFSAnimation("fists_draw")
 		self:GetOwner():GetViewModel():SetPlaybackRate(.1)
