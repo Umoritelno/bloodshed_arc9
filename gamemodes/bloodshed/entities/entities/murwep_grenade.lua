@@ -39,7 +39,7 @@ if SERVER then
             local tab = ents.FindInSphere(self:GetPos(), 32)
             for i=1,#tab do
                 local ply = tab[i]
-                if !IsValid(self.OwnerTrap) or (!ply:IsNPC() and !ply:IsPlayer()) or !ply:Visible(self) or ply == self.OwnerTrap or ply:Health() <= 0 or ply:IsKiller() and self.OwnerTrap:IsKiller() then continue end
+                if !IsValid(self.OwnerTrap) or (!ply:IsNPC() and !ply:IsPlayer()) or !ply:Visible(self) or ply == self.OwnerTrap or ply:Health() <= 0 or (ply:IsKiller() and self.OwnerTrap:IsKiller()) or (MuR:IsTDM() and ply:Team() == self.OwnerTrap:Team()) then continue end
                 self:ActivateGrenade()
             end
         end
@@ -55,7 +55,11 @@ if SERVER then
     function ENT:OnTakeDamage(dmg)
         if self.Activated then return end
         if dmg:GetDamage() > 5 then
-            self:Explode()
+            local repatt
+            if (IsValid(dmg:GetAttacker()) and dmg:GetAttacker():IsPlayer()) then
+               repatt = dmg:GetAttacker()
+            end
+            self:Explode(repatt)
         end
     end
 
@@ -69,7 +73,7 @@ if SERVER then
         end)
     end
     
-    function ENT:Explode()
+    function ENT:Explode(repatt)
         self.Activated = true
         local num = 1
         if self.SuperGrenade then
@@ -84,7 +88,9 @@ if SERVER then
                 ParticleEffect("AC_grenade_explosion_air", self:GetPos(), Angle(0,0,0))
                 util.Decal("Scorch", self:GetPos(), self:GetPos()-Vector(0,0,8), self)
                 local att = self
-                if IsValid(self.PlayerOwner) then
+                if IsValid(repatt) then
+                    att = repatt
+                elseif IsValid(self.PlayerOwner) then
                     att = self.PlayerOwner
                 end
                 if self.F1 then
