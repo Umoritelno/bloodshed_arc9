@@ -562,7 +562,7 @@ hook.Add("Think", "SuR_GameLogic", function()
 				MuR.Delay_Before_Lose = CurTime() + 5
 			elseif team1 > 0 and team2 > 0 and not MuR:DisablesGamemode() or MuR.Gamemode == 9 and MuR.TimeCount > CurTime() - MuR.TeamAssignDelay or MuR.TimeCount > CurTime() - 12 then
 				MuR.Delay_Before_Lose = CurTime() + 5
-			elseif team2 > 1 and MuR:DisablesGamemode() and MuR.Gamemode ~= 11 or (MuR.Gamemode == 11 or MuR.Gamemode == 12) and team2 > 0 and team1 > 0 then
+			elseif team2 > 1 and MuR:DisablesGamemode() and MuR.Gamemode ~= 11 or (MuR.Gamemode == 11) and team2 > 0 and team1 > 0 then
 				MuR.Delay_Before_Lose = CurTime() + 5 
 			end
 		end
