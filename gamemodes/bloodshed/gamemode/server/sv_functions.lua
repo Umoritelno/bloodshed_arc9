@@ -1135,6 +1135,7 @@ hook.Add("PlayerCanHearPlayersVoice", "MuR.Voice", function(listener, talker)
 end)
 
 hook.Add("PlayerCanSeePlayersChat", "MuR.Voice", function(text, team, listener, talker)
+ if !IsValid(talker) then return true end // фикс say для консоли
 	if MuR.GameStarted and MuR.TimeCount + 12 > CurTime() or MuR.Ending then return true end
 	if listener:GetPos():DistToSqr(talker:GetPos()) > 250000 and talker:Alive() or not listener:IsLineOfSightClear(talker) and talker:Alive() or not talker:Alive() and listener:Alive() then return false end
 end)
