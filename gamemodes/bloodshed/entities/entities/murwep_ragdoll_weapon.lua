@@ -486,6 +486,7 @@ if SERVER then
                 end
             end
         end
+    return true
     end
 
     function ENT:Initialize()
@@ -507,7 +508,11 @@ if SERVER then
         if !IsValid(ent) or !IsValid(wep) or !istable(self.data) then
             self:Remove()
         else
-            self:ConnectHands(ent, wep)
+            local result = self:ConnectHands(ent, wep)
+            if (!result) then
+                self:Remove()
+                return
+            end
 
             ent:DeleteOnRemove(self)
 
