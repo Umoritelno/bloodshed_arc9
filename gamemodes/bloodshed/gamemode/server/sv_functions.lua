@@ -962,7 +962,6 @@ function GM:PlayerDeath(ply, inf, att)
 		if !IsValid(ply) then return end
 		local att2 = ply.LastAttacker
 		if IsValid(att2) and att2:IsPlayer() then
-			print()
 			if (ply:Team() == 2 and att2:Team() == 2 and ply ~= att2) and MuR.Gamemode ~= 5 and MuR.Gamemode ~= 11 and MuR.Gamemode ~= 12 then
 				if ply.UnInnocentTime < CurTime() then
 					att2:ChangeGuilt(4)
