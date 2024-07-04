@@ -985,8 +985,8 @@ function GM:PlayerDeath(ply, inf, att)
 	end
 
 	if att:IsPlayer() and ply:GetNWFloat("ArrestState") ~= 2 and (att:GetNWString("Class") == "Officer" or att:GetNWString("Class") == "Riot") and ply ~= att then
-		att:ChangeGuilt(3)
-		MuR:GiveAnnounce("officer_killer", att)
+		//att:ChangeGuilt(3)
+		//MuR:GiveAnnounce("officer_killer", att)
 	end
 
 	if MuR.Gamemode == 6 and ply:GetNWString("Class") ~= "Zombie" then
