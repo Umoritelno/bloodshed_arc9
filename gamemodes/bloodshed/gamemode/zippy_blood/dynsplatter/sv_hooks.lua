@@ -129,7 +129,7 @@ hook.Add("EntityTakeDamage", "!EnhancedSplatter", function( ent, dmginfo )
 
 	timer.Simple(0.001, function()
 		if !IsValid(ent) then return end
-		if (!IsValid(tab[1]) or !IsValid(tab[2])) then print("FAILED TO SPAWN DYNSPLATTER",tab[1],tab[2]) return end
+		if (!IsValid(tab[1]) or !IsValid(tab[2])) then return end
 
 		NetworkCustomBlood( ent )
 
