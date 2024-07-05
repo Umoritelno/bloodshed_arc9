@@ -31,8 +31,8 @@ local function PrintGameModes()
 	while (!false) do // военное преступление 
 		local nameKey = "gamename" .. i
 		local descKey = "gamedesc" .. i
-		if LANG[nameKey] and LANG[descKey] then
-			print(i .. ". " .. LANG[nameKey])
+		if MuR.Language[nameKey] and MuR.Language[descKey] then
+			print(i .. ". " .. MuR.Language[nameKey])
    i = i + 1
   else
    break
@@ -40,7 +40,7 @@ local function PrintGameModes()
 	end
 end
 
-concommand.Add("mur_gamemodelist2", PrintGameModes)
+concommand.Add("mur_gamemodelist", PrintGameModes)
 
 MuR.SelectGameLanguage()
 
