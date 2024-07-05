@@ -243,16 +243,4 @@ local LANG = {
 	["log_data_know"] = "Подозреваемый",
 }
 
-local function PrintGameModes()
-	for i = 1, 14 do
-		local nameKey = "gamename" .. i
-		local descKey = "gamedesc" .. i
-		if LANG[nameKey] and LANG[descKey] then
-			print(i .. ". " .. LANG[nameKey] .. " - " .. LANG[descKey])
-		end
-	end
-end
-
-concommand.Add("mur_gamemodelist2", PrintGameModes)
-
 return LANG
