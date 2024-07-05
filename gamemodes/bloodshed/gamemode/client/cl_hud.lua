@@ -1028,7 +1028,9 @@ hook.Add("PostDrawOpaqueRenderables", "MuR.WantedIcon", function()
 	end
 end)
 
-------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+
+local INVALID_GM = "NON-REGISTERED GAMEMODE"
 
 function MuR:ShowStartScreen(gamemode, class)
 	MuR.DrawHUD = false
@@ -1060,46 +1062,8 @@ function MuR:ShowStartScreen(gamemode, class)
 		local otherdesc = ""
 		local desc = MuR.Language["civilian_desc"]
 		local color = Color(100, 150, 200)
-		local gamename = MuR.Language["gamename1"]
-		local gamedesc = MuR.Language["gamedesc1"]
-		
-		if gamemode == 2 then
-			gamename = MuR.Language["gamename2"]
-			gamedesc = MuR.Language["gamedesc2"]
-		elseif gamemode == 3 then
-			gamename = MuR.Language["gamename3"]
-			gamedesc = MuR.Language["gamedesc3"]
-		elseif gamemode == 4 then
-			gamename = MuR.Language["gamename4"]
-			gamedesc = MuR.Language["gamedesc4"]
-		elseif gamemode == 5 then
-			gamename = MuR.Language["gamename5"]
-			gamedesc = MuR.Language["gamedesc5"]
-		elseif gamemode == 6 then
-			gamename = MuR.Language["gamename6"]
-			gamedesc = MuR.Language["gamedesc6"]
-		elseif gamemode == 7 then
-			gamename = MuR.Language["gamename7"]
-			gamedesc = MuR.Language["gamedesc7"]
-		elseif gamemode == 8 then
-			gamename = MuR.Language["gamename8"]
-			gamedesc = MuR.Language["gamedesc8"]
-		elseif gamemode == 9 then
-			gamename = MuR.Language["gamename9"]
-			gamedesc = MuR.Language["gamedesc9"]
-		elseif gamemode == 10 then
-			gamename = MuR.Language["gamename10"]
-			gamedesc = MuR.Language["gamedesc10"]
-		elseif gamemode == 11 then
-			gamename = MuR.Language["gamename11"]
-			gamedesc = MuR.Language["gamedesc11"]
-		elseif gamemode == 12 then
-			gamename = MuR.Language["gamename12"]
-			gamedesc = MuR.Language["gamedesc12"]
-		elseif gamemode == 14 then
-			gamename = MuR.Language["gamename14"]
-			gamedesc = MuR.Language["gamedesc14"]
-		end		
+		local gamename = MuR.Language["gamename"..MuR.Gamemode] or INVALID_GM
+		local gamedesc = MuR.Language["gamedesc"..MuR.Gamemode] or INVALID_GM
 
 		if class == "Killer" then
 			classname = MuR.Language["murderer"]
