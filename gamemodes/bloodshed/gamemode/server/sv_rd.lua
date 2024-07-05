@@ -106,7 +106,7 @@ function pl:GiveRagdollWeapon(ent, awep)
 		ent.Weapon:Remove()
 	end
 	timer.Simple(0.001, function()
-		if not IsValid(ent) or not IsValid(awep) then return end
+		if !IsValid(ent) or !IsValid(awep) or !IsValid(self) then return end
 		if not awep.RagdollType and MuR.WeaponToRagdoll[awep:GetClass()] then
 			awep.RagdollType = MuR.WeaponToRagdoll[awep:GetClass()]
 		end
