@@ -286,8 +286,8 @@ function ENT:ZippyGoreMod3_BreakPhysBone(phys_bone_idx, data)
 						for i = 1, math.random(2,3) do
 							self:GetOwner():DamagePlayerSystem("blood")
 						end
-						if self:GetBoneName(bone) == "ValveBiped.Bip01_Head1" then
-							self:GetOwner():Kill()
+						if self:GetBoneName(bone) == "ValveBiped.Bip01_Head1" and ZGM3_CVARS["mur_gib_nohead_kill"] then
+							self.Owner:Kill()
 						end
 						self.Gibbed = true
 						self:GetOwner():TimeGetUpChange(99999, true)
