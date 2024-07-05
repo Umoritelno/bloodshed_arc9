@@ -26,6 +26,22 @@ function MuR.SelectGameLanguage()
 	MuR.LoadLanguage(cnv:GetString())
 end
 
+local function PrintGameModes()
+ local i = 1
+	while (!false) do // военное преступление 
+		local nameKey = "gamename" .. i
+		local descKey = "gamedesc" .. i
+		if LANG[nameKey] and LANG[descKey] then
+			print(i .. ". " .. LANG[nameKey])
+   i = i + 1
+  else
+   break
+		end
+	end
+end
+
+concommand.Add("mur_gamemodelist2", PrintGameModes)
+
 MuR.SelectGameLanguage()
 
 hook.Add("LanguageChanged", "MuR.ChangedLanguage", function(lang)
