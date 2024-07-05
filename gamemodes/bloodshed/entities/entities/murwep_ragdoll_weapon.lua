@@ -442,7 +442,7 @@ if SERVER then
                 self:Remove()
                 return
             end--]]
-            print("OWNER ISNT VALID,wep,ent)
+            print("OWNER ISNT VALID",wep,ent)
             return
         end
         local eang = ent.Owner:EyeAngles()
