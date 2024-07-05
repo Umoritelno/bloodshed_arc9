@@ -13,6 +13,7 @@ ZGM3_CVARS = {
 	["zippygore3_disable_always_gib_damage"] = true,
 	["zippygore3_gib_any_ragdoll"] = true,
 	["zippygore3_gib_dissolving_ragdoll"] = true,
+ ["mur_gib_nohead_kill"] = false,
 	-- Gibs:
 	["zippygore3_gib_limit"] = 300,
 	["zippygore3_gib_lifetime"] = 180,
