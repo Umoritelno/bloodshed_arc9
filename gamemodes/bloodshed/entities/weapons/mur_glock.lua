@@ -2506,13 +2506,13 @@ SWEP.Animations = {
 
     ["ready"] = {
 
-        Source = "base_ready",
+        Source = "base_draw",
 
-        Mult = 1,
+        Mult = 1.3,
 
         EventTable = {
 
-            {
+           --[[ {
 
                 t = 1.2, -- in seconds
 
@@ -2550,7 +2550,7 @@ SWEP.Animations = {
 
                 c = CHAN_ITEM, -- sound channel
 
-            },
+            }, --]]
 
         },
 
