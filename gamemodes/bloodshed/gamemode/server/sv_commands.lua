@@ -354,19 +354,20 @@ end)
 -- Фан команда
 concommand.Add("mur_grenadethrow", function(ply, cmd, args)
 	if ply:IsSuperAdmin() then
-		local gr = ents.Create("murwep_grenade")
-		gr:SetPos(ply:EyePos()+ply:GetForward()*32)
-		gr:Spawn()
-		local phys = gr:GetPhysicsObject()
-		if IsValid(phys) then
-			phys:SetVelocity(ply:GetAimVector()*512)
-		end
+		-- local gr = ents.Create("murwep_grenade")
+		-- gr:SetPos(ply:EyePos()+ply:GetForward()*32)
+		-- gr:Spawn()
+		-- local phys = gr:GetPhysicsObject()
+		-- if IsValid(phys) then
+		-- 	phys:SetVelocity(ply:GetAimVector()*512)
+		-- end
+		ply:ChatPrint('aga hui tebe eblan')
 	end
 end)
 
 -- Фан команда
 concommand.Add("mur_bomj", function(ply, cmd, args)
 	if ply:IsSuperAdmin() then
-		ply:AddMoney(999999999)
+		ply:ChatPrint('aga hui tebe eblan') -- default: ply:AddMoney(999999999)
 	end
 end)
