@@ -74,7 +74,9 @@ end
 function MuR:BoneData(ent, bone)
 	local boneid = ent:LookupBone(bone)
 	local pos, ang = ent:GetBonePosition(boneid)
-
+ if !pos then
+    pos = ent:GetPos()
+ end
 	return pos, ang
 end
 
