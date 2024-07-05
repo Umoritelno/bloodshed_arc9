@@ -1062,8 +1062,8 @@ function MuR:ShowStartScreen(gamemode, class)
 		local otherdesc = ""
 		local desc = MuR.Language["civilian_desc"]
 		local color = Color(100, 150, 200)
-		local gamename = MuR.Language["gamename"..MuR.Gamemode] or INVALID_GM
-		local gamedesc = MuR.Language["gamedesc"..MuR.Gamemode] or INVALID_GM
+		local gamename = MuR.Language["gamename" .. MuR.Gamemode] or INVALID_GM
+		local gamedesc = MuR.Language["gamedesc" .. MuR.Gamemode] or INVALID_GM
 
 		if class == "Killer" then
 			classname = MuR.Language["murderer"]
