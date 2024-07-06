@@ -743,6 +743,7 @@ hook.Add("PlayerSpawn", "MuR.Spawn", function(ply)
 		ply.Male = true
 	elseif class == "Soldier" then
 		local pri, sec, mel = table.Random(WeaponsTable["Primary"]), table.Random(WeaponsTable["Secondary"]), table.Random(WeaponsTable["Melee"])
+		ply:GiveWeapon("mur_scanner")	
 		ply:GiveWeapon(pri.class)
 		ply:GiveAmmo(pri.count * 6, pri.ammo, true)
 		ply:GiveWeapon(sec.class)
