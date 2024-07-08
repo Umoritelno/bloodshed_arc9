@@ -45,7 +45,7 @@ end
 function SWEP:GetNearestPlayer()
 	local ply, min = nil, math.huge
 	for _, pl in ipairs(player.GetAll()) do
-		if pl != self.Owner and pl:GetPos():DistToSqr(self.Owner:GetPos()) < min and pl:Alive() then
+		if pl != self.Owner and pl:GetPos():DistToSqr(self.Owner:GetPos()) < min and pl:Alive() and !pl:IsKiller() then
 			ply = pl
 			min = pl:GetPos():DistToSqr(self.Owner:GetPos())
 		end
