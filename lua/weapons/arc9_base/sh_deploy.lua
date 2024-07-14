@@ -303,7 +303,7 @@ function SWEP:DoDeployAnimation()
             if self:HasAnimation("draw_quick") then
                 self:PlayAnimation("draw_quick", self:GetProcessedValue("DeployTime", true, 1), true)
             else
-                self:PlayAnimation("draw", self:GetProcessedValue("DeployTime", true, 1) * 0.65, true, true) -- + delayedidle
+                self:PlayAnimation("draw", self:GetProcessedValue("DeployTime", true, 1), true, true) -- + delayedidle
             end
         else
             self:PlayAnimation("draw", self:GetProcessedValue("DeployTime", true, 1), true)

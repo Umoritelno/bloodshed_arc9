@@ -5,6 +5,7 @@ hook.Add("InitPostEntity", "MuR.Run", function()
 	//RunConsoleCommand("", 0)
 	//RunConsoleCommand("tacrp_visibleholster", 0)
 	RunConsoleCommand("arc9_mult_defaultammo", 0)
+	RunConsoleCommand("arc_never_ready",1)
 end)
 
 net.Receive("MuR.VoiceLines", function(len, ply)

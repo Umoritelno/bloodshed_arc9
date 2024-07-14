@@ -2608,6 +2608,13 @@ SWEP.Animations = {
 
     },
 
+	["holster"] = { // да, криво
+
+		Source = "sex",
+		Time = 0.1,
+
+	},
+
 }
 
 

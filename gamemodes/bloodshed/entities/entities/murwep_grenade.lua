@@ -59,7 +59,7 @@ if SERVER then
             if (IsValid(dmg:GetAttacker()) and dmg:GetAttacker():IsPlayer()) then
                repatt = dmg:GetAttacker()
             end
-            self:Explode(repatt)
+            self:Explode() // self:Explode(repatt)
         end
     end
 
@@ -73,7 +73,7 @@ if SERVER then
         end)
     end
     
-    function ENT:Explode(repatt)
+    function ENT:Explode(repatt,shouldtakerespons)
         self.Activated = true
         local num = 1
         if self.SuperGrenade then
@@ -90,7 +90,7 @@ if SERVER then
                 local att = self
                 if IsValid(repatt) then
                     att = repatt
-                elseif IsValid(self.PlayerOwner) then
+                elseif IsValid(self.PlayerOwner) then // and shouldtakerespons
                     att = self.PlayerOwner
                 end
                 if self.F1 then

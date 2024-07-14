@@ -83,7 +83,7 @@ SWEP.WorldModelMirror = nil  -- Use this to set a lower-quality version of the v
 
 SWEP.WorldModelOffset = {
 
-	Pos = Vector(-7, 3.2, -4), -- non tpik (while on ground, on npc etc)
+	Pos = Vector(-8, 3.2, -4), -- non tpik (while on ground, on npc etc)
 
 	Ang = Angle(0, 0, 180),
 

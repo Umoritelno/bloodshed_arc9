@@ -75,7 +75,7 @@ SWEP.WorldModel = "models/weapons/w_shot_m3super90.mdl" -- If you are going to M
 
 
 
-SWEP.MirrorVMWM = true -- Use this to use the viewmodel as a worldmodel.
+SWEP.MirrorVMWM = false -- Use this to use the viewmodel as a worldmodel.
 
 -- Highly recommended to save effort!
 
@@ -2637,7 +2637,7 @@ SWEP.Animations = {
 
         Source = "base_draw", -- QC sequence source, can be {"table", "of", "strings"} or "string"
 
-        Time = 0.4, -- overrides the duration of the sequence
+        Time = 0.75, -- overrides the duration of the sequence
 
         Mult = 1, -- multiplies time
 

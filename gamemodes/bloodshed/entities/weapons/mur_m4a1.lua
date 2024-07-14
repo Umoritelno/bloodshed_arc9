@@ -77,7 +77,7 @@ SWEP.ViewModelFlip = true
 
 
 
-SWEP.MirrorVMWM = true -- Use this to use the viewmodel as a worldmodel.
+SWEP.MirrorVMWM = false -- Use this to use the viewmodel as a worldmodel.
 
 -- Highly recommended to save effort!
 
