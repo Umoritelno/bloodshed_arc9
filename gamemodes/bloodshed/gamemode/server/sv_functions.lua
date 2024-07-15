@@ -933,6 +933,14 @@ hook.Add("SetupMove", "MuR_Move", function(ply, mv, cmd)
 	end
 end)
 
+--[[hook.Add("Move","MuR_ActualMove",function(ply,mv)
+	if MuR.Ending then
+		mv:SetMaxSpeed(0)
+		mv:SetMaxClientSpeed(0)
+		return
+	end
+end)--]]
+
 hook.Add("OnNPCKilled", "MuR.NPCLogic", function(ent, att)
 	local allow = MuR.PoliceState > 0 and ent.IsPolice
 	if ent.IsPolice then

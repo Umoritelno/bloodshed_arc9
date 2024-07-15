@@ -43,7 +43,7 @@ SWEP.MirrorVMWM = true
 
 SWEP.WorldModelOffset = {
 
-	Pos = Vector(-5, -3, -8), -- non tpik (while on ground, on npc etc)
+	Pos = Vector(-7, 4, -9), -- non tpik (while on ground, on npc etc)
 
 	Ang = Angle(0, 0, 180),
 

@@ -260,10 +260,10 @@ function pl:StopRagdolling(keeprag, playanim)
 
 		timer.Simple(time, function()
 			if not IsValid(self) then return end
-			self:Freeze(false)
+			self:Freeze(MuR.Ending)
 		end)
 	else
-		self:Freeze(false)
+		self:Freeze(MuR.Ending) // вай нот
 		self:SetSVAnimation("")
 	end
 
